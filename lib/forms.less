@@ -42,9 +42,10 @@ label {
 input,
 textarea,
 select,
-.uneditable-input {
+.uneditable-input
+{
   display: block;
-  width: 210px;
+  //width: 210px;
   height: @baseLineHeight;
   padding: 4px;
   margin-bottom: 9px;
@@ -58,7 +59,8 @@ select,
 // Mini reset for unique input types
 input[type=image],
 input[type=checkbox],
-input[type=radio] {
+input[type=radio]
+{
   width: auto;
   height: auto;
   padding: 0;
@@ -67,6 +69,11 @@ input[type=radio] {
   line-height: normal;
   border: none;
   cursor: pointer;
+}
+
+input[type=image]
+{
+    margin: 0;
 }
 
 // Reset the file input to browser defaults

@@ -2,7 +2,8 @@
 // -------------
 
 // Shared colors for buttons and alerts
-.btn {
+.btn,
+.button {
   // Set text color
   &.danger,
   &.danger:hover,
@@ -28,7 +29,11 @@
 }
 
 // Base .btn styles
-.btn {
+.btn,
+.button,
+.defaultbutton,
+.button-disabled
+{
   // Button Base
   display: inline-block;
   padding: 5px 10px 6px;
@@ -56,10 +61,12 @@
   }
 
   // Primary Button Type
-  &.primary {
+  &.primary,
+  &.defaultbutton
+  {
     color: @white;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    .gradientBar(@blue, @blueDark)
+    .gradientBar(@orange, @orangeDark)
   }
 
    // Transitions
@@ -103,13 +110,16 @@
 }
 // Super jank hack for removing border-radius from IE9 so we can keep filter gradients on alerts and buttons
 :root .alert-message,
-:root .btn {
+:root .btn,
+:root .button {
   border-radius: 0 \0;
 }
 
 // Help Firefox not be a jerk about adding extra padding to buttons
 button.btn,
-input[type=submit].btn {
+button.button,
+input[type=submit].btn,
+input[type=submit].button {
   &::-moz-focus-inner {
   	padding: 0;
   	border: 0;
