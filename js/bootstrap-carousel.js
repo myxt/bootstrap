@@ -1,6 +1,6 @@
 /* ==========================================================
  * bootstrap-carousel.js v2.0.0
- * http://twitter.github.com/bootstrap/javascript.html#alerts
+ * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -147,6 +147,7 @@
         , $target = $($this.attr('data-target') || $this.attr('href'))
         , options = !$target.data('modal') && $.extend({}, $target.data(), $this.data())
       $target.carousel(options)
+      e.preventDefault()
     })
   })
 

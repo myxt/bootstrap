@@ -2,7 +2,10 @@ VERSION=2.0.0
 BOOTSTRAP = ./bootstrap.css
 BOOTSTRAP_MIN = ./bootstrap.min.css
 BOOTSTRAP_LESS = ./lib/bootstrap.less
-LESS_COMPESSOR ?= `which lessc`
+BOOTSTRAP_RESPONSIVE = ./bootstrap-responsive.css
+BOOTSTRAP_RESPONSIVE_MIN = ./bootstrap-responsive.min.css
+BOOTSTRAP_RESPONSIVE_LESS = ./lib/responsive.less
+LESS_COMPRESSOR ?= `which lessc`
 UGLIFY_JS ?= `which uglifyjs`
 WATCHR ?= `which watchr`
 
@@ -11,11 +14,15 @@ WATCHR ?= `which watchr`
 #
 
 build:
-	@@if test ! -z ${LESS_COMPESSOR}; then \
+	@@if test ! -z ${LESS_COMPRESSOR}; then \
 		sed -e 's/@VERSION/'"v${VERSION}"'/' -e 's/@DATE/'"`date`"'/' <${BOOTSTRAP_LESS} >${BOOTSTRAP_LESS}.tmp; \
 		lessc ${BOOTSTRAP_LESS}.tmp > ${BOOTSTRAP}; \
 		lessc ${BOOTSTRAP_LESS}.tmp > ${BOOTSTRAP_MIN} --compress; \
 		rm -f ${BOOTSTRAP_LESS}.tmp; \
+		sed -e 's/@VERSION/'"v${VERSION}"'/' -e 's/@DATE/'"`date`"'/' <${BOOTSTRAP_RESPONSIVE_LESS} >${BOOTSTRAP_RESPONSIVE_LESS}.tmp; \
+		lessc ${BOOTSTRAP_RESPONSIVE_LESS}.tmp > ${BOOTSTRAP_RESPONSIVE}; \
+		lessc ${BOOTSTRAP_RESPONSIVE_LESS}.tmp > ${BOOTSTRAP_RESPONSIVE_MIN} --compress; \
+		rm -f ${BOOTSTRAP_RESPONSIVE_LESS}.tmp; \
 		echo "Bootstrap successfully built! - `date`"; \
 	else \
 		echo "You must have the LESS compiler installed in order to build Bootstrap."; \
