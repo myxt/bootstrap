@@ -76,46 +76,7 @@ $(function(){
     }
   }
 
-  // javascript build logic
-
-  var inputs = $("#javascript input")
-
-  // toggle all plugin checkboxes
-  $('#selectAll').on('click', function (e) {
-    e.preventDefault()
-    inputs.attr('checked', !inputs.is(':checked'))
-  })
-
-  // handle build button dropdown
-  var buildTypes = $('#javascriptBuilder .dropdown-menu li').on('click', function () {
-    buildTypes.removeClass('active')
-    $(this).addClass('active')
-  })
-
-  // request built javascript
-  $('#javascriptBuild').on('click', function () {
-
-    var names = $("#javascript input:checked")
-      .map(function () { return this.value })
-      .toArray()
-
-    if (names[names.length - 1] == 'bootstrap-transition.js') {
-      names.unshift(names.pop())
-    }
-
-    $.ajax({
-      type: 'POST'
-    , dataType: 'jsonpi'
-    , params: {
-        branch: '2.0-wip'
-      , dir: 'js'
-      , filenames: names
-      , compress: buildTypes.first().hasClass('active')
-      }
-    , url: "http://bootstrap.herokuapp.com"
-    })
-  })
-
+ 
   // fix sub nav playa
   var $win = $(window)
     , $nav = $('.subnav')
@@ -190,15 +151,74 @@ $(function () {
           .attr('target', name)
 
         $.each(opts.params, function(k, v) {
+
           $('<input>')
             .attr('type', 'hidden')
             .attr('name', k)
-            .attr('value', v)
+            .attr('value', typeof v == 'string' ? v : JSON.stringify(v))
             .appendTo(form)
-        });
+        })
 
         form.appendTo('body').submit()
       }
     }
   })
 }(jQuery);
+
+ // javascript build logic
+
+$(function () {
+
+  var inputsComponent = $("#components.download input")
+    , inputsPlugin = $("#plugins.download input")
+    , inputsVariables = $("#variables.download input")
+
+  // toggle all plugin checkboxes
+  $('#components.download .toggle-all').on('click', function (e) {
+    e.preventDefault()
+    inputsComponent.attr('checked', !inputsComponent.is(':checked'))
+  })
+
+  $('#plugins.download .toggle-all').on('click', function (e) {
+    e.preventDefault()
+    inputsPlugin.attr('checked', !inputsPlugin.is(':checked'))
+  })
+
+  $('#variables.download .toggle-all').on('click', function (e) {
+    e.preventDefault()
+    inputsVariables.val('')
+  })
+
+  // request built javascript
+  $('.download-btn').on('click', function () {
+
+    var css = $("#components.download input:checked")
+          .map(function () { return this.value })
+          .toArray()
+      , js = $("#plugins.download input:checked")
+          .map(function () { return this.value })
+          .toArray()
+      , vars = {}
+      , img = ['glyphicons-halflings-sprite.png', 'glyphicons-halflings-sprite-white.png']
+
+  $("#variables.download input")
+    .each(function () {
+      $(this).val() && (vars[ $(this).prev().text() ] = $(this).val())
+    })
+
+    $.ajax({
+      type: 'POST'
+    , url: 'http://bootstrap.herokuapp.com'
+    , dataType: 'jsonpi'
+    , params: {
+        branch: '2.0-wip'
+      , js: js
+      , css: css
+      , vars: vars
+      , img: img
+    }
+    })
+  })
+
+})
+

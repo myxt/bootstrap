@@ -5,7 +5,7 @@
         <p class="lead">{{_i}}Bring Bootstrap's components to life&mdash;now with 12 custom <a href="http://jquery.com/" target="_blank">jQuery</a> plugins.{{/i}}
         <div class="subnav">
           <ul class="nav pills">
-            <li><a href="#javascript">{{_i}}Overview{{/i}}</a></li>
+            <li><a href="#javascript">{{_i}}All plugins{{/i}}</a></li>
             <li><a href="#modals">{{_i}}Modal{{/i}}</a></li>
             <li><a href="#dropdowns">{{_i}}Dropdown{{/i}}</a></li>
             <li><a href="#scrollspy">{{_i}}Scrollspy{{/i}}</a></li>
@@ -560,10 +560,10 @@ $('#myModal').on('hidden', function () {
 &lt;/ul&gt;
 
 &lt;div class="tab-content"&gt;
-  &lt;div class="active" id="home"&gt;...&lt;/div&gt;
-  &lt;div id="profile"&gt;...&lt;/div&gt;
-  &lt;div id="messages"&gt;...&lt;/div&gt;
-  &lt;div id="settings"&gt;...&lt;/div&gt;
+  &lt;div class="tab-pane active" id="home"&gt;...&lt;/div&gt;
+  &lt;div class="tab-pane" id="profile"&gt;...&lt;/div&gt;
+  &lt;div class="tab-pane" id="messages"&gt;...&lt;/div&gt;
+  &lt;div class="tab-pane" id="settings"&gt;...&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
@@ -989,7 +989,7 @@ $('#my-alert').bind('closed', function () {
           <div class="accordion" id="accordion2">
             <div class="accordion-group">
               <div class="accordion-heading">
-                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
                   {{_i}}Collapsible Group Item #1{{/i}}
                 </a>
               </div>
@@ -1001,7 +1001,7 @@ $('#my-alert').bind('closed', function () {
             </div>
             <div class="accordion-group">
               <div class="accordion-heading">
-                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
                   {{_i}}Collapsible Group Item #2{{/i}}
                 </a>
               </div>
@@ -1013,7 +1013,7 @@ $('#my-alert').bind('closed', function () {
             </div>
             <div class="accordion-group">
               <div class="accordion-heading">
-                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
                   {{_i}}Collapsible Group Item #3{{/i}}
                 </a>
               </div>
