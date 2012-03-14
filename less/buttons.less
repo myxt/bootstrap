@@ -6,9 +6,11 @@
 // --------------------------------------------------
 
 // Core
-.btn
+.btn,
+.button
 {
   display: inline-block;
+  .ie7-inline-block();
   padding: 4px 10px 4px;
   margin-bottom: 0; // For input.btn
   font-size: @baseFontSize;
@@ -17,21 +19,21 @@
   text-align: center;
   text-shadow: 0 1px 1px rgba(255,255,255,.75);
   vertical-align: middle;
-  .btnBackground(@white, darken(@white, 10%));
-  border: 1px solid #ccc;
-  border-bottom-color: #bbb;
+  .buttonBackground(@btnBackground, @btnBackgroundHighlight);
+  border: 1px solid @btnBorder;
+  border-bottom-color: darken(@btnBorder, 10%);
   .border-radius(4px);
   @shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
   .box-shadow(@shadow);
   cursor: pointer;
 
   // Give IE7 some love
-  .reset-filter();
   .ie7-restore-left-whitespace();
 }
 
 // Hover state
-.btn:hover
+.btn:hover,
+.button:hover
 {
   color: @grayDark;
   text-decoration: none;
@@ -44,14 +46,17 @@
 }
 
 // Focus state for keyboard and accessibility
-.btn:focus
+.btn:focus,
+.button:focus
 {
   .tab-focus();
 }
 
 // Active state
 .btn.active,
-.btn:active
+.btn:active,
+.button.active,
+.button:active
 {
   background-image: none;
   @shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
@@ -63,7 +68,9 @@
 
 // Disabled state
 .btn.disabled,
-.btn[disabled]
+.btn[disabled],
+.button.disabled,
+.button[disabled]
 {
   cursor: default;
   background-image: none;
@@ -121,7 +128,8 @@
 .btn-info,
 .btn-info:hover,
 .btn-inverse,
-.btn-inverse:hover {
+.btn-inverse:hover,
+.button-primary {
   text-shadow: 0 -1px 0 rgba(0,0,0,.25);
   color: @white;
 }
@@ -131,34 +139,35 @@
 .btn-danger.active,
 .btn-success.active,
 .btn-info.active,
-.btn-dark.active {
+.btn-inverse.active, {
   color: rgba(255,255,255,.75);
 }
 
 // Set the backgrounds
 // -------------------------
-.btn-primary {
-  .btnBackground(@primaryButtonBackground, spin(@primaryButtonBackground, 20));
+.btn-primary,
+.defaultbutton {
+  .buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
 }
 // Warning appears are orange
 .btn-warning {
-  .btnBackground(lighten(@orange, 15%), @orange);
+  .buttonBackground(@btnWarningBackground, @btnWarningBackgroundHighlight);
 }
 // Danger and error appear as red
 .btn-danger {
-  .btnBackground(#ee5f5b, #bd362f);
+  .buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
 }
 // Success appears as green
 .btn-success {
-  .btnBackground(#62c462, #51a351);
+  .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
 }
 // Info appears as a neutral blue
 .btn-info {
-  .btnBackground(#5bc0de, #2f96b4);
+  .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
 }
 // Inverse appears as dark gray
 .btn-inverse {
-  .btnBackground(#454545, #262626);
+  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
 
 
@@ -177,12 +186,16 @@ input[type="submit"].btn {
   // IE7 has some default padding on button controls
   *padding-top: 2px;
   *padding-bottom: 2px;
-  &.large {
+  &.btn-large {
     *padding-top: 7px;
     *padding-bottom: 7px;
   }
-  &.small {
+  &.btn-small {
     *padding-top: 3px;
     *padding-bottom: 3px;
+  }
+  &.btn-mini {
+    *padding-top: 1px;
+    *padding-bottom: 1px;
   }
 }
